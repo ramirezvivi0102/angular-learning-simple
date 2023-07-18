@@ -3,6 +3,14 @@ import { RouteInfo } from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
  
   {
+    path: '/administracion-mod/tipo-vehiculos',
+    title: 'Tipos de vehiculos',
+    icon: 'bi bi-aspect-ratio-fill',
+    class: '',
+    extralink: false,
+    submenu: []
+  },
+  {
     path: '/dashboard',
     title: 'Dashboard',
     icon: 'bi bi-speedometer2',
