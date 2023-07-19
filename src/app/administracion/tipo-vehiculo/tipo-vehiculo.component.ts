@@ -7,22 +7,15 @@ import { TypeVehicle } from '../models/type-vehiculo';
 @Component({
   selector: 'app-tipo-vehiculo',
   templateUrl: './tipo-vehiculo.component.html',
-  styleUrls: ['./tipo-vehiculo.component.scss'],
-  standalone: true,
-  imports:[NgFor]
+  styleUrls: ['./tipo-vehiculo.component.scss']
 })
 export class TipoVehiculoComponent implements OnInit  {
 
   typeVehicles: TypeVehicle[] = [];
-  
-  topSelling: Product[];
-  trow: TableRows[];
+
 
   constructor(private tipoServicio: TipoVehiculoService) {
 
-    this.topSelling = TopSelling;
-
-    this.trow = Employee;
   }
 
   ngOnInit(): void {
