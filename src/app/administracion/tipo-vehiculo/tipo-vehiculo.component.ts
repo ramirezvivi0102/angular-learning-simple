@@ -14,15 +14,10 @@ import { TypeVehicle } from '../models/type-vehiculo';
 export class TipoVehiculoComponent implements OnInit  {
 
   typeVehicles: TypeVehicle[] = [];
-  
-  topSelling: Product[];
-  trow: TableRows[];
+
 
   constructor(private tipoServicio: TipoVehiculoService) {
 
-    this.topSelling = TopSelling;
-
-    this.trow = Employee;
   }
 
   ngOnInit(): void {
