@@ -2,7 +2,7 @@ import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
   {
-    path: '/administracion-mod/base-of-heroes',
+    path: '/heroes',
     title: 'Base heroes',
     icon: 'bi bi-arrow-repeat',
     class: '',

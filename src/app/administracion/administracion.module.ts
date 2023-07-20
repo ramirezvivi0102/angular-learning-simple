@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { AdministracionRoutes } from './administracion.routing';
 import { ComponentsModule } from '../component/component.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { BaseHeroesComponent } from './base-heroes/base-heroes.component';
 import { TipoVehiculoComponent } from './tipo-vehiculo/tipo-vehiculo.component';
 
 
@@ -16,8 +15,7 @@ import { TipoVehiculoComponent } from './tipo-vehiculo/tipo-vehiculo.component';
     RouterModule.forChild(AdministracionRoutes),
   ],
   declarations: [
-    TipoVehiculoComponent,
-    BaseHeroesComponent
+    TipoVehiculoComponent
   ]
 })
 export class AdministracionModule { }
