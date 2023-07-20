@@ -32,7 +32,7 @@
                         
                         <td>
                             <button type="button" class="btn btn-primary">Modificar</button>
-                            <button type="button" class="btn btn-danger">Eliminar</button>
+                            <button type="button" class="btn btn-danger" (click)="abrirPopUpEliminar()" >Eliminar</button>
                         </td>
                     </tr>              
                 </tbody>
@@ -43,4 +43,24 @@
       
     </div>
   </div>
+
+  <div class="modal" tabindex="-1" role="dialog" 
+    [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">GeeksForGeeks</h4>
+      </div>
+      <div class="modal-body">
+        <p>One Stop Solution for all CS problems</p>
   
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" 
+                (click)="cerrarPopUpEliminar()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,4 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Employee, Product, TableRows, TopSelling } from 'src/app/component/table/table-data';
 import { TipoVehiculoService } from '../services/tipo-vehiculo.service';
 import { TypeVehicle } from '../models/type-vehiculo';
 
@@ -11,10 +9,14 @@ import { TypeVehicle } from '../models/type-vehiculo';
 })
 export class TipoVehiculoComponent implements OnInit  {
 
+  
   typeVehicles: TypeVehicle[] = [];
 
+  displayStyle = "none";
 
-  constructor(private tipoServicio: TipoVehiculoService) {
+  constructor(private tipoServicio: TipoVehiculoService,
+    // private modalService: NgbModal
+    ) {
 
   }
 
@@ -23,6 +25,20 @@ export class TipoVehiculoComponent implements OnInit  {
     this.getAllTypeVehicles();
   }
 
+    // Acciones de botones
+    saveSomeThing(){
+
+    }
+  
+    abrirPopUpEliminar(){
+      this.displayStyle = 'block'
+    }
+
+    cerrarPopUpEliminar(){
+      this.displayStyle = "none";
+    }
+
+// Funciones de acceso al servicio base de datos
   getAllTypeVehicles(): void {
     this.tipoServicio.getAllTypeVehicles()
       .subscribe(typeVehiclesServer => {
@@ -86,6 +102,5 @@ export class TipoVehiculoComponent implements OnInit  {
         console.log('Type Vehicle deleted successfully');
       });
   }
-
 
 }
