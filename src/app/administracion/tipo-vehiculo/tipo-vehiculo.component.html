@@ -12,27 +12,26 @@
                         <th class="text-dark font-medium fs-4">Nombre</th>
                         <th class="text-dark font-medium fs-4">Patron de validación</th>
                         <th class="text-dark font-medium fs-4">Acciones</th>
-                        <th class="text-dark font-medium fs-4">Budget</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let ts of typeVehicles'>
+                    <tr *ngFor='let typeVehicule of typeVehicles'>
                         <td>
                             <div class="d-flex align-items-center">
                                 <img src="assets/images/users/user1.jpg" alt="user" width="45" class="rounded-circle">
                             </div>
                         </td>
-                        <td class="fs-4">{{ts.name}}</td>
+                        <td class="fs-4">{{typeVehicule.name}}</td>
                         <td>
                             
                             <div class="alert alert-warning" role="alert">
-                                {{ts.pattern}}
+                                {{typeVehicule.pattern}}
                               </div>
                         </td>
                         
                         <td>
                             <button type="button" class="btn btn-primary">Modificar</button>
-                            <button type="button" class="btn btn-danger" (click)="abrirPopUpEliminar()" >Eliminar</button>
+                            <button type="button" class="btn btn-danger" (click)="abrirPopUpEliminar(typeVehicule)" >Eliminar</button>
                         </td>
                     </tr>              
                 </tbody>
@@ -49,16 +48,20 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">GeeksForGeeks</h4>
+        <h4 class="modal-title">Confirmando eliminacion</h4>
       </div>
       <div class="modal-body">
-        <p>One Stop Solution for all CS problems</p>
+        <p>Confirma que desea eliminar el registro: {{registroSeleccionado?.name}}</p>
   
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" 
+                (click)="deleteTypeVehicle(registroSeleccionado.id)" [disabled]="!registroSeleccionado">
+          Si, eliminar
+        </button>
+        <button type="button" class="btn btn-secondary" 
                 (click)="cerrarPopUpEliminar()">
-          Close
+          Cancelar
         </button>
       </div>
     </div>
