@@ -13,26 +13,26 @@ export class TipoVehiculoService {
   constructor(private http: HttpClient) {}
 
   getAllTypeVehicles(): Observable<TypeVehicle[]> {
-    return this.http.get<TypeVehicle[]>(`${this.baseUrl}/type-vehicles`);
+    return this.http.get<TypeVehicle[]>(`${this.baseUrl}/tipo-vehiculo`);
   }
 
   getTypeVehicleById(id: number): Observable<TypeVehicle> {
-    return this.http.get<TypeVehicle>(`${this.baseUrl}/type-vehicles/${id}`);
+    return this.http.get<TypeVehicle>(`${this.baseUrl}/tipo-vehiculo/${id}`);
   }
 
   createTypeVehicle(typeVehicle: TypeVehicle): Observable<TypeVehicle> {
-    return this.http.post<TypeVehicle>(`${this.baseUrl}/type-vehicles`, typeVehicle);
+    return this.http.post<TypeVehicle>(`${this.baseUrl}/tipo-vehiculo`, typeVehicle);
   }
 
   updateTypeVehicle(id: number, typeVehicle: TypeVehicle): Observable<TypeVehicle> {
-    return this.http.put<TypeVehicle>(`${this.baseUrl}/type-vehicles/${id}`, typeVehicle);
+    return this.http.put<TypeVehicle>(`${this.baseUrl}/tipo-vehiculo/${id}`, typeVehicle);
   }
 
   updatePatchTypeVehicle(id: number, typeVehicle: Partial<TypeVehicle>): Observable<TypeVehicle> {
-    return this.http.patch<TypeVehicle>(`${this.baseUrl}/type-vehicles/${id}`, typeVehicle);
+    return this.http.patch<TypeVehicle>(`${this.baseUrl}/tipo-vehiculo/${id}`, typeVehicle);
   }
 
   deleteTypeVehicle(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/type-vehicles/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/tipo-vehiculo/${id}`);
   }
 }
