@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TipoVehiculoService } from '../services/tipo-vehiculo.service';
 import { TypeVehicle } from '../models/type-vehiculo';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tipo-vehiculo',
@@ -11,21 +12,64 @@ export class TipoVehiculoComponent implements OnInit {
   typeVehicles: TypeVehicle[] = [];
 
   displayStyle = 'none';
-  // nombreRegistroSeleccionado!: TypeVehicle;
+
+  enEdicion = false;
+  form: FormGroup;
+  submitted: boolean = false;
 
   registroSeleccionado: TypeVehicle | undefined;
 
   constructor(
-    private tipoServicio: TipoVehiculoService
-  ) // private modalService: NgbModal
+    private tipoServicio: TipoVehiculoService,
+    private formBuilder: FormBuilder
+  ) 
   {}
 
   ngOnInit(): void {
     // ...
     this.getAllTypeVehicles();
+    this.configurarForm();
   }
 
-  // Acciones de botones
+  configurarForm() {
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      pattern: ['', [Validators.required, Validators.maxLength(15)]]
+    });
+  }
+
+  // Se ejecuta cuando se hace clic en el boton submit del formulario
+  onSubmitForm(){
+
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      console.log("Fallo validacion")
+      return;
+    }
+
+    this.createTypeVehicle(this.form.value);
+  }
+
+  onResetForm(){
+debugger;
+  }
+
+  onMostrarFormulario(){
+    this.enEdicion = true;
+  }
+
+  onCancelarForm(){
+    this.enEdicion = false;
+  }
+
+  itemForm(formItem): any {
+    return this.form.controls[formItem];
+  }
+
+
+
+  // Acciones de boton eliminar
 
   abrirPopUpEliminar(typeVehicule: TypeVehicle) {
     this.displayStyle = 'block';
@@ -55,18 +99,17 @@ export class TipoVehiculoComponent implements OnInit {
     });
   }
 
-  createTypeVehicle(): void {
-    const newTypeVehicle: TypeVehicle = {
-      id: 0, // Set the appropriate ID value
-      name: 'New Type Vehicle',
-      pattern: 'New Pattern',
-    };
+  createTypeVehicle(newTypeVehicle: TypeVehicle): void {
+
+    console.log("Llamando servicio back crear TipoVehiculo..")
 
     this.tipoServicio
       .createTypeVehicle(newTypeVehicle)
       .subscribe((createdTypeVehicle) => {
         // Handle the created TypeVehicle object
         console.log(createdTypeVehicle);
+        this.getAllTypeVehicles();
+        this.onCancelarForm();
       });
   }
 

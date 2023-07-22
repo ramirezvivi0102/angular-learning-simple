@@ -5,12 +5,15 @@ import { AdministracionRoutes } from './administracion.routing';
 import { ComponentsModule } from '../component/component.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TipoVehiculoComponent } from './tipo-vehiculo/tipo-vehiculo.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     ComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgApexchartsModule,
     RouterModule.forChild(AdministracionRoutes),
   ],

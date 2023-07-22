@@ -34,9 +34,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/scss/style.scss",
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/scss/style.scss"
+              
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",

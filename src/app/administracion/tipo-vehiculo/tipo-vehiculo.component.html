@@ -1,9 +1,85 @@
-<div class="row">
+
+  <div class="register-form" [hidden]="enEdicion === false">
+    <div class="register-form">
+      <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+  
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('name').errors }"
+            placeholder="Ingrese el nombre"
+          />
+          <div *ngIf="submitted && itemForm('name').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('name').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('name').errors.maxlength">
+              El campo tiene una longitud no permitida
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="pattern">Patrón de validación de identificación</label>
+          <input
+            type="text"
+            id="pattern"
+            formControlName="pattern"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('pattern').errors }"
+            placeholder="Ingrese un patron de validación"
+          />
+          <div *ngIf="submitted && itemForm('pattern').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('pattern').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('pattern').errors.maxlength">
+              El campo tiene una longitud no permitida
+            </div>
+          </div>
+        </div>
+  
+    
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Register</button>
+          <button
+            type="button"
+            (click)="onResetForm()"
+            class="btn btn-warning float-right"
+          >
+            Reset
+          </button>
+          <button
+            type="button"
+            (click)="onCancelarForm()"
+            class="btn btn-default float-right"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+<!-- HTML DE LA LISTA -->
+<div class="row"  [hidden]="enEdicion === true">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Tipos de vehículos</h4>
-          <h5 class="card-subtitle text-muted">Sirve para clasificación de Vehiculos</h5>
+          
+          <div class="row">
+            <div class="col">
+              <h5 class="card-subtitle text-muted">Sirve para clasificación de Vehiculos</h5>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-success" (click)="onMostrarFormulario()">Crear nuevo</button>
+            </div>
+          </div>
+
+
           <div class="table-responsive">
             <table class="table table-hover align-middle text-nowrap">
                 <thead>
@@ -43,6 +119,7 @@
     </div>
   </div>
 
+  <!-- HTML DEL MODAL - CONFIRMAR ELIMINAR -->
   <div class="modal" tabindex="-1" role="dialog" 
     [ngStyle]="{'display':displayStyle}">
   <div class="modal-dialog" role="document">
