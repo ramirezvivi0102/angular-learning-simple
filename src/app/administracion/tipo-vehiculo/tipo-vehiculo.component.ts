@@ -17,6 +17,8 @@ export class TipoVehiculoComponent implements OnInit {
   form: FormGroup;
   submitted: boolean = false;
 
+  idRegistro: number = 0;
+
   registroSeleccionado: TypeVehicle | undefined;
 
   constructor(
@@ -38,6 +40,19 @@ export class TipoVehiculoComponent implements OnInit {
     });
   }
 
+  onActualizarForm(){
+
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      console.log("Fallo validacion")
+      return;
+    }
+
+    console.log("llama updateTypeVehicle()")
+    this.updateTypeVehicle(this.idRegistro, this.form.value);
+  }
+
   // Se ejecuta cuando se hace clic en el boton submit del formulario
   onSubmitForm(){
 
@@ -48,15 +63,30 @@ export class TipoVehiculoComponent implements OnInit {
       return;
     }
 
+    console.log("llama createTypeVehicle()")
     this.createTypeVehicle(this.form.value);
   }
 
   onResetForm(){
-debugger;
+    this.form.reset();
+  }
+
+  mostrarFormularioModificar(typeVehicule: TypeVehicle) {
+    this.enEdicion = true;
+    this.idRegistro = typeVehicule.id;
+    this.form.patchValue({
+      name: typeVehicule.name,
+      pattern: typeVehicule.pattern
+    });
+    this.gotoTop();
   }
 
   onMostrarFormulario(){
+    this.submitted = false;
+    this.idRegistro = 0;
     this.enEdicion = true;
+    this.onResetForm();
+    this.gotoTop();
   }
 
   onCancelarForm(){
@@ -66,8 +96,6 @@ debugger;
   itemForm(formItem): any {
     return this.form.controls[formItem];
   }
-
-
 
   // Acciones de boton eliminar
 
@@ -113,18 +141,15 @@ debugger;
       });
   }
 
-  updateTypeVehicle(id: number): void {
-    const updatedTypeVehicle: TypeVehicle = {
-      id: id, // Set the appropriate ID value
-      name: 'Updated Type Vehicle',
-      pattern: 'Updated Pattern',
-    };
-
+  updateTypeVehicle(id: number, updatedTypeVehicle: TypeVehicle): void {
+ 
     this.tipoServicio
       .updateTypeVehicle(id, updatedTypeVehicle)
       .subscribe((updatedTypeVehicle) => {
         // Handle the updated TypeVehicle object
         console.log(updatedTypeVehicle);
+        this.getAllTypeVehicles();
+        this.onCancelarForm();
       });
   }
 
@@ -149,4 +174,12 @@ debugger;
       this.getAllTypeVehicles();
     });
   }
+
+  // Funciones auxiliares
+
+  // Alinea la ventana en la posicion 0,0 (arriba - evitar el scroll)
+  gotoTop() {
+    window.scrollTo(0, 0);
+  }
+
 }

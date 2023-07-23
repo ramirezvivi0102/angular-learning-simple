@@ -41,7 +41,8 @@
   
     
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="submit" class="btn btn-primary" *ngIf="idRegistro === 0">Crear</button>
+          <button type="button" (click)="onActualizarForm()" class="btn btn-primary" *ngIf="idRegistro > 0 ">Actualizar</button>
           <button
             type="button"
             (click)="onResetForm()"
@@ -106,7 +107,7 @@
                         </td>
                         
                         <td>
-                            <button type="button" class="btn btn-primary">Modificar</button>
+                            <button type="button" class="btn btn-primary" (click)="mostrarFormularioModificar(typeVehicule)">Modificar</button>
                             <button type="button" class="btn btn-danger" (click)="abrirPopUpEliminar(typeVehicule)" >Eliminar</button>
                         </td>
                     </tr>              
