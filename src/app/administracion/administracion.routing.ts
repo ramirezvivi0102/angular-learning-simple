@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { TipoVehiculoComponent } from './tipo-vehiculo/tipo-vehiculo.component';
+import { TipoProductoComponent } from './tipo-producto/tipo-producto.component';
 
 export const AdministracionRoutes: Routes = [
 
@@ -9,6 +10,11 @@ export const AdministracionRoutes: Routes = [
 			{
 				path: 'tipo-vehiculos',
 				component: TipoVehiculoComponent
+			},
+			{
+				path: 'tipo-producto',
+				component:TipoProductoComponent
+
 			},
 			
 		]

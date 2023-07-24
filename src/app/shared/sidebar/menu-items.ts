@@ -2,6 +2,14 @@ import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
   {
+    path: './administracion-mod/tipo-producto',
+    title: 'tipo-producto',
+    icon: 'bi bi-arrow-repeat',
+    class: '',
+    extralink: false,
+    submenu: []
+  },
+  {
     path: '/heroes',
     title: 'Base heroes',
     icon: 'bi bi-arrow-repeat',

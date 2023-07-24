@@ -6,6 +6,7 @@ import { ComponentsModule } from '../component/component.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TipoVehiculoComponent } from './tipo-vehiculo/tipo-vehiculo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TipoProductoComponent } from './tipo-producto/tipo-producto.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule.forChild(AdministracionRoutes),
   ],
   declarations: [
-    TipoVehiculoComponent
+    TipoVehiculoComponent,
+    TipoProductoComponent
   ]
 })
 export class AdministracionModule { }
