@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TipoVehiculoService } from '../services/tipo-vehiculo.service';
 import { TypeVehicle } from '../models/type-vehiculo';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-tipo-vehiculo',
@@ -36,7 +37,7 @@ export class TipoVehiculoComponent implements OnInit {
   configurarForm() {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
-      pattern: ['', [Validators.required, Validators.maxLength(15)]]
+      pattern: ['', [Validators.required, Validators.maxLength(16)]]
     });
   }
 
@@ -110,14 +111,31 @@ export class TipoVehiculoComponent implements OnInit {
 
   // Funciones de acceso al servicio base de datos
   getAllTypeVehicles(): void {
-    this.tipoServicio.getAllTypeVehicles().subscribe((typeVehiclesServer) => {
-      this.typeVehicles = typeVehiclesServer;
-      console.log(
-        'servicio: tipoServicio.getAllTypeVehicles() trajo ' +
-          typeVehiclesServer.length +
-          ' registros'
-      );
-    });
+
+    this.tipoServicio
+      .getAllTypeVehicles()
+      .subscribe({
+
+        next: (listTipoServicio) => {
+          this.typeVehicles = listTipoServicio;
+          console.log(
+            'servicio: tipoServicio.getAllTypeVehicles() trajo ' +
+            listTipoServicio.length +
+              ' registros'
+          );
+        },
+
+        error: (e) => {
+          alert("hubo un error al crear nuevo registro en el servidor")
+          console.log("error: al consultar el servicio: " + e);
+        },
+
+        complete: () =>  {
+          console.log('finalizo el llamado a createTypeVehicle')
+        },
+
+      });
+
   }
 
   getTypeVehicleById(id: number): void {
@@ -133,24 +151,52 @@ export class TipoVehiculoComponent implements OnInit {
 
     this.tipoServicio
       .createTypeVehicle(newTypeVehicle)
-      .subscribe((createdTypeVehicle) => {
-        // Handle the created TypeVehicle object
-        console.log(createdTypeVehicle);
-        this.getAllTypeVehicles();
-        this.onCancelarForm();
+      .subscribe({
+
+        next: (createdTypeVehicle) => {
+          console.log(createdTypeVehicle);
+          alert("ok registro creado correcatamente")
+          this.getAllTypeVehicles();
+          this.onCancelarForm();
+        },
+
+        error: (e) => {
+          alert("hubo un error al crear nuevo registro en el servidor")
+          console.log("error: al consultar el servicio: " + e);
+        },
+
+        complete: () =>  {
+          console.log('finalizo el llamado a createTypeVehicle')
+        },
+
       });
+
   }
 
   updateTypeVehicle(id: number, updatedTypeVehicle: TypeVehicle): void {
- 
+
     this.tipoServicio
       .updateTypeVehicle(id, updatedTypeVehicle)
-      .subscribe((updatedTypeVehicle) => {
-        // Handle the updated TypeVehicle object
-        console.log(updatedTypeVehicle);
-        this.getAllTypeVehicles();
-        this.onCancelarForm();
+      .subscribe({
+
+        next: (updatedTypeVehicle) => {
+          console.log(updatedTypeVehicle);
+          alert("ok registro actualizado correcatamente")
+          this.getAllTypeVehicles();
+          this.onCancelarForm();
+        },
+
+        error: (e) => {
+          alert("hubo un error al actualizar en el servidor")
+          console.log("error: al consultar el servicio: " + e);
+        },
+
+        complete: () =>  {
+          console.log('finalizo el llamado a updateTipoVEHICULO')
+        },
+
       });
+  
   }
 
   updatePatchTypeVehicle(id: number): void {
@@ -160,19 +206,53 @@ export class TipoVehiculoComponent implements OnInit {
 
     this.tipoServicio
       .updatePatchTypeVehicle(id, updatedTypeVehicle)
-      .subscribe((updatedTypeVehicle) => {
-        // Handle the updated TypeVehicle object
-        console.log(updatedTypeVehicle);
-      });
+      .subscribe({
+
+        next: (updatedTypeVehicle) => {
+          console.log(updatedTypeVehicle);
+          alert("ok registro actualizado parcialmente correcatamente")
+          this.getAllTypeVehicles();
+          this.onCancelarForm();
+        },
+
+        error: (e) => {
+          alert("hubo un error al actualizar parcialmente en el servidor")
+          console.log("error: al consultar el servicio: " + e);
+        },
+
+        complete: () =>  {
+          console.log('finalizo el llamado a updatePatchTypeVehicle')
+        },
+
+      })
+      
   }
 
   deleteTypeVehicle(id: number): void {
-    this.tipoServicio.deleteTypeVehicle(id).subscribe(() => {
-      // Handle the successful deletion
-      console.log('Type Vehicle deleted successfully');
-      this.cerrarPopUpEliminar();
-      this.getAllTypeVehicles();
-    });
+
+    this.tipoServicio
+      .deleteTypeVehicle(id)
+      .subscribe({
+
+        next: () => {
+          alert("ok registro eliminado  correcatamente")
+          this.cerrarPopUpEliminar();
+          this.getAllTypeVehicles();
+          
+          console.log('Type Vehicle deleted successfully');
+        },
+
+        error: (e) => {
+          alert("hubo un error al eliminar el registro en el servidor")
+          console.log("error: al consultar el servicio: " + e);
+        },
+
+        complete: () =>  {
+          console.log('finalizo el llamado a deleteTypeVehicle')
+        },
+
+      })
+
   }
 
   // Funciones auxiliares
