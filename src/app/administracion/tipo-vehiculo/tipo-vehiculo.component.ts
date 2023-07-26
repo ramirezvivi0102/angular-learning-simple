@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TipoVehiculoService } from '../services/tipo-vehiculo.service';
 import { TypeVehicle } from '../models/type-vehiculo';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-tipo-vehiculo',
