@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TipoProductoService } from '../services/tipo-producto.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { TypeProducto } from '../models/type-producto';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -24,6 +25,7 @@ export class TipoProductoComponent implements OnInit{
     registroSeleccionado: TypeProducto | undefined;
   
     constructor(
+      private snackBar: MatSnackBar,
       private tipoServicio: TipoProductoService,
       private formBuilder: FormBuilder
     ) 
@@ -157,13 +159,15 @@ export class TipoProductoComponent implements OnInit{
   
           next: (createdTypeProducto) => {
             console.log(createdTypeProducto);
-            alert("ok registro creado correcatamente")
+
+            this.snackBar.open('Registro creado correctamente', 'Aceptar', { panelClass: 'app-notification-success', duration: 5000,  });
+
             this.getAllTypeProducto();
             this.onCancelarForm();
           },
   
           error: (e) => {
-            alert("hubo un error al crear nuevo registro en el servidor")
+            this.snackBar.open('hubo un error al crear nuevo registro en el servidor', 'Aceptar', { panelClass: 'app-notification-error', duration: 5000,  });
             console.log("error: al consultar el servicio: " + e);
           },
   
@@ -183,13 +187,13 @@ export class TipoProductoComponent implements OnInit{
   
           next: (updatedTypeProducto) => {
             console.log(updatedTypeProducto);
-            alert("ok registro actualizado correcatamente")
+            this.snackBar.open('Registro actualizado correctamente', 'Aceptar', { panelClass: 'app-notification-success', duration: 5000,  });
             this.getAllTypeProducto();
             this.onCancelarForm();
           },
   
           error: (e) => {
-            alert("hubo un error al actualizar en el servidor")
+            this.snackBar.open('hubo un error actualizando registro en el servidor', 'Aceptar', { panelClass: 'app-notification-error', duration: 5000,  });
             console.log("error: al consultar el servicio: " + e);
           },
   
@@ -200,35 +204,7 @@ export class TipoProductoComponent implements OnInit{
         });
     
     }
-  
-    updatePatchTypeProducto(id: number): void {
-      const updatedTypeProducto: Partial<TypeProducto> = {
-        nombre: 'Updated Type Producto',
-      };
-  
-      this.tipoServicio
-        .updatePatchTypeProducto(id, updatedTypeProducto)
-        .subscribe({
-  
-          next: (updatedTypeProducto) => {
-            console.log(updatedTypeProducto);
-            alert("ok registro actualizado parcialmente correcatamente")
-            this.getAllTypeProducto();
-            this.onCancelarForm();
-          },
-  
-          error: (e) => {
-            alert("hubo un error al actualizar parcialmente en el servidor")
-            console.log("error: al consultar el servicio: " + e);
-          },
-  
-          complete: () =>  {
-            console.log('finalizo el llamado a updatePatchTypeVehicle')
-          },
-  
-        })
-        
-    }
+
   
     deleteTypeProducto(id: number): void {
   
@@ -237,7 +213,7 @@ export class TipoProductoComponent implements OnInit{
         .subscribe({
   
           next: () => {
-            alert("ok registro eliminado  correcatamente")
+            this.snackBar.open('Registro eliminado correctamente', 'Aceptar', { panelClass: 'app-notification-success', duration: 5000,  });
             this.cerrarPopUpEliminar();
             this.getAllTypeProducto();
             
@@ -245,7 +221,7 @@ export class TipoProductoComponent implements OnInit{
           },
   
           error: (e) => {
-            alert("hubo un error al eliminar el registro en el servidor")
+            this.snackBar.open('hubo un error al eliminar registro en el servidor', 'Aceptar', { panelClass: 'app-notification-error', duration: 5000,  });
             console.log("error: al consultar el servicio: " + e);
           },
   
