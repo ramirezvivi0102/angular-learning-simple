@@ -6,7 +6,9 @@ import { ComponentsModule } from '../component/component.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TipoVehiculoComponent } from './tipo-vehiculo/tipo-vehiculo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TipoProductoComponent } from './tipo-producto/tipo-producto.component'; // Import MatSnackBarModule
+import { TipoProductoComponent } from './tipo-producto/tipo-producto.component';
+import { PaisesEditarComponent } from './paises-editar/paises-editar.component';
+import { PaisesListadoComponent } from './paises-listado/paises-listado.component'; // Import MatSnackBarModule
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { TipoProductoComponent } from './tipo-producto/tipo-producto.component';
   ],
   declarations: [
     TipoVehiculoComponent,
-    TipoProductoComponent
+    TipoProductoComponent,
+    PaisesEditarComponent,
+    PaisesListadoComponent
   ]
 })
 export class AdministracionModule { }

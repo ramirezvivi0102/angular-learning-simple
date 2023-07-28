@@ -2,6 +2,14 @@ import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
   {
+    path: './administracion-mod/paises',
+    title: 'paises',
+    icon: 'bi bi-flag',
+    class: '',
+    extralink: false,
+    submenu: []
+  },
+  {
     path: './administracion-mod/tipo-producto',
     title: 'tipo-producto',
     icon: 'bi bi-arrow-repeat',
