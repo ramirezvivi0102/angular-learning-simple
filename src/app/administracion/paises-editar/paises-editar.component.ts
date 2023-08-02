@@ -25,12 +25,19 @@ export class PaisesEditarComponent {
 
     ){
      this.pais = data;
+     this.idRegistro = this.pais.id;
      if( this.pais.id == 0){
       console.log("el registro es nuevo");
      }else {
       console.log("el registro es para edicion");
+      this.configurarForm();
+      // inicializar el form que viene del metodo de cada fila (de la tabla)
+      this.form.patchValue({
+        nombre: this.pais.nombre,
+        sigla: this.pais.sigla
+      });
      }
-     this.configurarForm();
+     
   }
 
 
@@ -38,7 +45,6 @@ export class PaisesEditarComponent {
 
   enEdicion = false;
   form: FormGroup;
-  form2: FormGroup;
   submitted: boolean = false;
 
   idRegistro: number = 0;
@@ -142,7 +148,7 @@ debugger;
         next: (updatedPaises) => {
           console.log(updatedPaises);
           alert("ok registro actualizado correcatamente")
-          this.onCancelarForm();
+          this.dialogRef.close(true);
         },
 
         error: (e) => {
