@@ -16,7 +16,6 @@ import { Approutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { DbzModule } from './dbz/dbz.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +33,7 @@ import { DbzModule } from './dbz/dbz.module';
     RouterModule.forRoot(Approutes, { useHash: false }),
     FullComponent,
     NavigationComponent,
-    SidebarComponent,
-    DbzModule,
+    SidebarComponent
   ],
   providers: [
     {

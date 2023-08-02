@@ -7,10 +7,6 @@ export const Approutes: Routes = [
     path: '',
     component: FullComponent,
     children: [
-      {
-        path: 'heroes',
-        loadChildren: () => import('./base-heroes/base-heroes.module').then(m => m.BaseHeroesModule)
-      },
 
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
