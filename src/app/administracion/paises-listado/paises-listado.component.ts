@@ -3,6 +3,8 @@ import { Paises } from '../models/paises';
 import { PaisesService } from '../services/paises.service';
 import { PaisesEditarComponent } from '../paises-editar/paises-editar.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogoEliminarComponent } from '../dialogo-eliminar/dialogo-eliminar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-paises-listado',
@@ -17,7 +19,8 @@ export class PaisesListadoComponent  implements OnInit{
 
   constructor(
     private paisesService: PaisesService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
 
   }
@@ -73,9 +76,25 @@ export class PaisesListadoComponent  implements OnInit{
 
   // Acciones de boton eliminar
 
-  abrirPopUpEliminar(Paises: Paises) {
-    this.displayStyle = 'block';
-    this.registroSeleccionado = Paises;
+  abrirPopUpEliminar(pais: Paises) {
+   
+    this.registroSeleccionado = pais;
+
+    const dialogRef: MatDialogRef<DialogoEliminarComponent> = this.dialog.open(DialogoEliminarComponent,{
+      data:{
+        entidad: 'Pais',
+        referencia: pais.nombre + ' - ' + pais.sigla
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'si') {
+        this.eliminar(pais.id)
+      } else if (result === 'no') {
+        
+        console.log('Cancelled');
+      } 
+    });
   }
 
 
@@ -115,7 +134,28 @@ export class PaisesListadoComponent  implements OnInit{
     });
   }
 
+  eliminar(id: number): void {
+    this.paisesService.deletePaises(id).subscribe({
+  
+      next: () => {
+        console.log();
 
+        this.snackBar.open('Registro eliminado correctamente', 'Aceptar', { panelClass: 'app-notification-success', duration: 5000,  });
+
+        this.getAllPaises();
+      },
+
+      error: (e) => {
+        this.snackBar.open('hubo un error al eliminar registro en el servidor', 'Aceptar', { panelClass: 'app-notification-error', duration: 5000,  });
+        console.log("error: al eliminar el servicio: " + e);
+      },
+
+      complete: () =>  {
+        console.log('finalizo el llamado a deletePaises')
+      },
+
+    });
+  }
   // Funciones auxiliares
 }
 

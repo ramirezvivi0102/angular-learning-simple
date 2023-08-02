@@ -11,6 +11,7 @@ import { PaisesEditarComponent } from './paises-editar/paises-editar.component';
 import { PaisesListadoComponent } from './paises-listado/paises-listado.component'; // Import MatSnackBarModule
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import { AngularMaterialAllModule } from '../angular-material-all/angular-material-all.module';
+import { DialogoEliminarComponent } from './dialogo-eliminar/dialogo-eliminar.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { AngularMaterialAllModule } from '../angular-material-all/angular-materi
     TipoVehiculoComponent,
     TipoProductoComponent,
     PaisesEditarComponent,
-    PaisesListadoComponent
+    PaisesListadoComponent,
+    DialogoEliminarComponent
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

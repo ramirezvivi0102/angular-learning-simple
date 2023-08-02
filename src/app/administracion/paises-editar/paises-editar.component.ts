@@ -63,7 +63,6 @@ export class PaisesEditarComponent {
 
   // Se ejecuta cuando se hace clic en el boton submit del formulario
   onSubmitForm(){
-debugger;
     this.submitted = true;
 
     if (this.form.invalid) {
