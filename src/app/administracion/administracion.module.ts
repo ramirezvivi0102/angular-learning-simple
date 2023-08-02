@@ -9,7 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TipoProductoComponent } from './tipo-producto/tipo-producto.component';
 import { PaisesEditarComponent } from './paises-editar/paises-editar.component';
 import { PaisesListadoComponent } from './paises-listado/paises-listado.component'; // Import MatSnackBarModule
-
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import { AngularMaterialAllModule } from '../angular-material-all/angular-material-all.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { PaisesListadoComponent } from './paises-listado/paises-listado.componen
     FormsModule,
     ReactiveFormsModule,
     NgApexchartsModule,
-
+    AngularMaterialAllModule,
     RouterModule.forChild(AdministracionRoutes),
   ],
   declarations: [
@@ -26,6 +27,9 @@ import { PaisesListadoComponent } from './paises-listado/paises-listado.componen
     TipoProductoComponent,
     PaisesEditarComponent,
     PaisesListadoComponent
+  ],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ]
 })
 export class AdministracionModule { }

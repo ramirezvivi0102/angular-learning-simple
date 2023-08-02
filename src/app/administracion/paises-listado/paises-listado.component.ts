@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Paises } from '../models/paises';
 import { PaisesService } from '../services/paises.service';
+import { PaisesEditarComponent } from '../paises-editar/paises-editar.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-paises-listado',
@@ -16,11 +16,11 @@ export class PaisesListadoComponent  implements OnInit{
   registroSeleccionado: Paises | undefined;
 
   constructor(
-    private snackBar: MatSnackBar,
     private paisesService: PaisesService,
-    private formBuilder: FormBuilder
-  ) 
-  {}
+    private dialog: MatDialog
+  ) {
+
+  }
    
 
   ngOnInit(): void {
@@ -28,11 +28,46 @@ export class PaisesListadoComponent  implements OnInit{
     this.getAllPaises();
   }
 
-  mostrarFormularioModificar(paises: Paises) {
-    
+  mostrarFormularioModificar(pais: Paises) {
+    const dialogRef: MatDialogRef<PaisesEditarComponent> = this.dialog.open(PaisesEditarComponent,{
+      data:pais
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.getAllPaises();
+      } else if (result === false) {
+        
+        console.log('Cancelled');
+      } else {
+        // Handle the dialog being closed without clicking on the buttons (e.g., clicking on the X button)
+        console.log('Closed');
+      }
+    });
+
   }
 
   onMostrarFormulario(){
+
+    const dialogRef: MatDialogRef<PaisesEditarComponent> = this.dialog.open(PaisesEditarComponent,{
+      data:{
+        id: 0,
+        nombre: '',
+        sigla: ''
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.getAllPaises();
+      } else if (result === false) {
+        
+        console.log('Cancelled');
+      } else {
+        // Handle the dialog being closed without clicking on the buttons (e.g., clicking on the X button)
+        console.log('Closed');
+      }
+    });
 
   }
 

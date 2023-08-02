@@ -6,23 +6,17 @@ import {
 } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { Routes, RouterModule } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { FullComponent } from './layouts/full/full.component';
-
-
 import { NavigationComponent } from './shared/header/navigation.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-
 import { Approutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-
+import { DbzModule } from './dbz/dbz.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FullComponent,
     NavigationComponent,
     SidebarComponent,
+    DbzModule,
   ],
   providers: [
     {

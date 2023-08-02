@@ -14,4 +14,19 @@
     }
   }
 
-
+  // .dialog-title-bar {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   padding: 16px;
+  //   background-color: #f0f0f0;
+  // }
+  
+  .dialog-title-bar span {
+    font-size: 20px;
+  }
+  
+  .mat-dialog-content {
+    padding: 16px;
+  }
+  
