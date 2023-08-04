@@ -3,6 +3,7 @@ import { Paises } from '../models/paises';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PaisesService } from '../services/paises.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-paises-editar',
@@ -15,6 +16,7 @@ export class PaisesEditarComponent {
  titulo = 'Edición de paises'
 
  constructor( 
+  private snackBar: MatSnackBar,
   private paisesServicio: PaisesService,
     private formBuilder: FormBuilder,
 
@@ -24,13 +26,17 @@ export class PaisesEditarComponent {
     private dialogRef: MatDialogRef<PaisesEditarComponent>
 
     ){
+
      this.pais = data;
      this.idRegistro = this.pais.id;
+     
+     this.configurarForm();
+
      if( this.pais.id == 0){
       console.log("el registro es nuevo");
+
      }else {
       console.log("el registro es para edicion");
-      this.configurarForm();
       // inicializar el form que viene del metodo de cada fila (de la tabla)
       this.form.patchValue({
         nombre: this.pais.nombre,
@@ -118,12 +124,11 @@ export class PaisesEditarComponent {
           //  al componente que lo llamo (paises-listar) el resultado
           // del registro creado
           // this.dialogRef.close(createdPaises);
-
-          alert("ok registro creado correcatamente")
+          this.snackBar.open('Registro creado correcatamente', 'Aceptar', { panelClass: 'app-notification-success', duration: 5000,  });
         },
 
         error: (e) => {
-          alert("hubo un error al crear nuevo registro en el servidor")
+          this.snackBar.open('hubo un error al crear nuevo registro en el servidor', 'Aceptar', { panelClass: 'app-notification-danger', duration: 5000,  });
           console.log("error: al consultar el servicio: " + e);
         },
 
@@ -146,12 +151,12 @@ export class PaisesEditarComponent {
 
         next: (updatedPaises) => {
           console.log(updatedPaises);
-          alert("ok registro actualizado correcatamente")
+          this.snackBar.open('Registro actualizado correcatamente', 'Aceptar', { panelClass: 'app-notification-success', duration: 5000,  });
           this.dialogRef.close(true);
         },
 
         error: (e) => {
-          alert("hubo un error al actualizar en el servidor")
+          this.snackBar.open('Se presento un error al intentar actualizar el registro', 'Aceptar', { panelClass: 'app-notification-danger', duration: 5000,  });
           console.log("error: al consultar el servicio: " + e);
         },
 
