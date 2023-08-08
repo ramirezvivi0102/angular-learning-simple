@@ -41,7 +41,7 @@ export class EditarColorsComponent {
       // inicializar el form que viene del metodo de cada fila (de la tabla)
       this.form.patchValue({
         nombre: this.colors.nombre,
-        rgb: this.colors.rgb,
+        rgb:this.colors.rgb ,
         favorito: this.colors.favorito
       });
      }
@@ -65,7 +65,7 @@ export class EditarColorsComponent {
   configurarForm() {
     this.form = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.maxLength(50)]],
-      rgb: ['', [Validators.required, Validators.maxLength(4)]]
+      rgb: ['', [Validators.required, Validators.maxLength(10)]]
     });
   }
 

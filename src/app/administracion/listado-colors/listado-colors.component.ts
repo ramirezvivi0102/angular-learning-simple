@@ -34,7 +34,7 @@ export class ListadoColorsComponent {
 
   mostrarFormularioModificar(color:Colores ) {
     const dialogRef: MatDialogRef<EditarColorsComponent> = this.dialog.open(EditarColorsComponent,{
-      data:this.colors
+      data:color
     });
 
     dialogRef.afterClosed().subscribe((result) => {

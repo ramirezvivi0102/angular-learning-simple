@@ -36,7 +36,7 @@
                         <td class="fs-4">{{x.nombre}}</td>
                         <td>
                             
-                            <div class="alert alert-warning" role="alert">
+                            <div class="alert"  [ngStyle]="{'background-color': x.rgb}" role="alert">
                                 {{x.rgb}}
                               </div>
                         </td>
