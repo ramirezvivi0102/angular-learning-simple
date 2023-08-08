@@ -1,0 +1,52 @@
+ 
+<h1 mat-dialog-title> {{titulo}}</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+
+  <mat-dialog-content>
+
+    <div class="register-form">
+
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" formControlName="nombre" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && itemForm('nombre').errors }" 
+          placeholder="Ingrese el nombre" autocomplete="off" />
+        <div *ngIf="submitted && itemForm('nombre').errors" class="invalid-feedback">
+          <div *ngIf="itemForm('nombre').errors.required">EL campo requerido</div>
+          <div *ngIf="itemForm('nombre').errors.maxlength">
+            El campo tiene una longitud no permitida
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="rgb">RGB</label>
+        <input type="text" id="rgb" formControlName="rgb" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && itemForm('rgb').errors }" 
+          placeholder="Ingrese rgb" autocomplete="off" />
+        <div *ngIf="submitted && itemForm('rgb').errors" class="invalid-feedback">
+          <div *ngIf="itemForm('rgb').errors.required">EL campo requerido</div>
+          <div *ngIf="itemForm('rgb').errors.maxlength">
+            El campo tiene una longitud no permitida
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="submit" class="btn btn-primary" *ngIf="idRegistro === 0">Crear</button>
+    <button type="button" (click)="onActualizarForm()" class="btn btn-primary"
+      *ngIf="idRegistro > 0 ">Actualizar</button>
+    <button type="button" (click)="onResetForm()" class="btn btn-warning float-right">
+      Reset
+    </button>
+    <button type="button" (click)="onCancelarForm()" class="btn btn-default float-right">
+      Cancelar
+    </button>
+  </mat-dialog-actions>
+
+</form>

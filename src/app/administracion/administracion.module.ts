@@ -9,9 +9,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TipoProductoComponent } from './tipo-producto/tipo-producto.component';
 import { PaisesEditarComponent } from './paises-editar/paises-editar.component';
 import { PaisesListadoComponent } from './paises-listado/paises-listado.component'; // Import MatSnackBarModule
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import { MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import { AngularMaterialAllModule } from '../angular-material-all/angular-material-all.module';
 import { DialogoEliminarComponent } from './dialogo-eliminar/dialogo-eliminar.component';
+import { ListadoColorsComponent } from './listado-colors/listado-colors.component';
+import { EditarColorsComponent } from './editar-colors/editar-colors.component';
+import { EliminarColorsComponent } from './eliminar-colors/eliminar-colors.component';
 
 @NgModule({
   imports: [
@@ -28,7 +31,10 @@ import { DialogoEliminarComponent } from './dialogo-eliminar/dialogo-eliminar.co
     TipoProductoComponent,
     PaisesEditarComponent,
     PaisesListadoComponent,
-    DialogoEliminarComponent
+    DialogoEliminarComponent,
+    ListadoColorsComponent,
+    EditarColorsComponent,
+    EliminarColorsComponent
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

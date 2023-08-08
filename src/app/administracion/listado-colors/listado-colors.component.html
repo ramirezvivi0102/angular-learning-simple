@@ -1,0 +1,69 @@
+
+
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Tipos de Colores</h6>
+          
+          <div class="row align-items-center">
+            <div class="col-4 justify-content">
+              <h5 class="card-subtitle text-muted">Sirve para clasificación de Colores</h5>
+            </div>
+            <div class="col-4">
+              <img src="assets\images\colorimg\cuadro-colors.png" alt="colorimg" width="200" height="50"class="rectangle">
+            </div>
+            <div class="col-4">
+              <button class="btn btn-success" (click)="onMostrarFormulario()">Crear nuevo</button>
+            </div>
+          </div>
+          
+
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap align-items-center">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">COLOR</th>
+                        <th class="text-dark font-medium fs-4">RGB</th>
+                        <th class="text-dark font-medium fs-4">FAVORITO</th>
+                        <th class="text-dark font-medium fs-4">ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let x of colors'>
+                        
+                        <td class="fs-4">{{x.nombre}}</td>
+                        <td>
+                            
+                            <div class="alert alert-warning" role="alert">
+                                {{x.rgb}}
+                              </div>
+                        </td>
+                        <td>
+                        
+                          <button *ngIf="x.favorito" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+                            <mat-icon>favorite</mat-icon>
+                          </button>
+                          
+                          <button *ngIf="x.favorito==false" mat-icon-button color="default" aria-label="Example icon button with a heart icon">
+                            <mat-icon>favorite</mat-icon>
+                          </button>
+                         
+                        
+                        </td>
+                        
+                        <td>
+                          <button type="button" style="margin: 10px" class="btn btn-primary"
+                            (click)="mostrarFormularioModificar(x)">Modificar</button>
+                          <button type="button" style="margin: 10px" class="btn btn-danger" (click)="abrirPopUpEliminar(x)">Eliminar</button>
+                        </td>
+                      </tr>             
+              </tbody>
+            </table>
+        </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
