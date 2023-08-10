@@ -5,49 +5,49 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ColoresService } from '../services/colors.service';
 
-
 @Component({
   selector: 'app-editar-colors',
   templateUrl: './editar-colors.component.html',
-  styleUrls: ['./editar-colors.component.scss']
+  styleUrls: ['./editar-colors.component.scss'],
 })
 export class EditarColorsComponent {
-  
- colors: Colores| undefined;
- titulo = 'Edición de Colores'
+  colors: Colores | undefined;
+  titulo = 'Edición de Colores';
+  formControlName: any;
+  x:any ="";
+  colorComponente: string = "";
 
- constructor( 
-  private snackBar: MatSnackBar,
-  private ColorsService: ColoresService,
+  constructor(
+    private snackBar: MatSnackBar,
+    private ColorsService: ColoresService,
     private formBuilder: FormBuilder,
 
     // object para data: recibir desde el componente paises-listado
-    // dialogRef controlar el cierre del modal 
+    // dialogRef controlar el cierre del modal
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<EditarColorsComponent>
+  ) {
+    this.colors = data;
+    this.idRegistro = this.colors.id;
 
-    ){
+    this.configurarForm();
 
-     this.colors = data;
-     this.idRegistro = this.colors.id;
-     
-     this.configurarForm();
-
-     if( this.colors.id == 0){
-      console.log("el registro es nuevo");
-
-     }else {
-      console.log("el registro es para edicion");
+    if (this.colors.id == 0) {
+      console.log('el registro es nuevo');
+    } else {
+      console.log('el registro es para edicion');
       // inicializar el form que viene del metodo de cada fila (de la tabla)
       this.form.patchValue({
         nombre: this.colors.nombre,
-        rgb:this.colors.rgb ,
-        favorito: this.colors.favorito
+        rgb: this.colors.rgb,
+        favorito: this.colors.favorito,
+        
       });
-     }
-     
+      this.colorComponente = this.colors.rgb;
+    }
   }
-
+  color = '';
+   
 
   displayStyle = 'none';
 
@@ -59,26 +59,34 @@ export class EditarColorsComponent {
 
   ngOnInit(): void {
     // ...
-    
   }
 
   configurarForm() {
     this.form = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.maxLength(50)]],
-      rgb: ['', [Validators.required, Validators.maxLength(10)]]
+      nombre: ['', [Validators.required]],
+      rgb: ['', [Validators.required]],
+      favorito: ['', [Validators.required]],
     });
+
+    this.form.controls["rgb"].valueChanges.subscribe((color) => {
+      if (this.form.controls["rgb"].valid) {
+        this.colorComponente = color;
+      }
+
+    });
+    
   }
 
   // Se ejecuta cuando se hace clic en el boton submit del formulario
-  onSubmitForm(){
+  onSubmitForm() {
     this.submitted = true;
 
     if (this.form.invalid) {
-      console.log("Fallo validacion")
+      console.log('Fallo validacion');
       return;
     }
 
-    console.log("llama createcolors()")
+    console.log('llama createcolors()');
     this.createColors(this.form.value);
   }
 
@@ -86,24 +94,25 @@ export class EditarColorsComponent {
     this.submitted = true;
 
     if (this.form.invalid) {
-      console.log("Fallo validacion")
+      console.log('Fallo validacion');
       return;
     }
 
-    console.log("llama createcolors()")
+    console.log('llama createcolors()');
     this.updateColors(this.colors.id, this.form.value);
   }
 
-  onResetForm(){
+  onResetForm() {
+    debugger;
     this.form.reset();
   }
 
-  onMostrarFormulario(){
+  onMostrarFormulario() {
     this.idRegistro = 0;
     this.enEdicion = true;
   }
 
-  onCancelarForm(){
+  onCancelarForm() {
     this.dialogRef.close();
   }
 
@@ -111,67 +120,80 @@ export class EditarColorsComponent {
     return this.form.controls[formItem];
   }
 
+  cambiarFavorito(value): any{
+  this.form.patchValue({
+    nombre: this.form.controls['nombre'].value,
+    rgb:  this.form.controls['rgb'].value,
+    favorito: value,
+  });
+  this.colors.favorito=value;
+  // return this.form.controls['favorito'];
+
+ }
   createColors(newcolors: Colores): void {
+    console.log('Llamando servicio back crear Colores..');
 
-    console.log("Llamando servicio back crear Paises..")
+    this.ColorsService.createColors(newcolors).subscribe({
+      next: (createColors) => {
+        console.log(createColors);
 
-    this.ColorsService
-      .createColors(newcolors)
-      .subscribe({
+        // ejemplo de devolver (luego de cerrar el modal)
+        //  al componente que lo llamo (paises-listar) el resultado
+        // del registro creado
+        // this.dialogRef.close(createdPaises);
+        this.snackBar.open('Registro creado correcatamente', 'Aceptar', {
+          panelClass: 'app-notification-success',
+          duration: 5000,
+        });
+      },
 
-        next: (createColors) => {
-          console.log(createColors);
+      error: (e) => {
+        this.snackBar.open(
+          'hubo un error al crear nuevo registro en el servidor',
+          'Aceptar',
+          { panelClass: 'app-notification-danger', duration: 5000 }
+        );
+        console.log('error: al consultar el servicio: ' + e);
+      },
 
-          // ejemplo de devolver (luego de cerrar el modal)
-          //  al componente que lo llamo (paises-listar) el resultado
-          // del registro creado
-          // this.dialogRef.close(createdPaises);
-          this.snackBar.open('Registro creado correcatamente', 'Aceptar', { panelClass: 'app-notification-success', duration: 5000,  });
-        },
+      complete: () => {
+        console.log('finalizo el llamado a createColors');
 
-        error: (e) => {
-          this.snackBar.open('hubo un error al crear nuevo registro en el servidor', 'Aceptar', { panelClass: 'app-notification-danger', duration: 5000,  });
-          console.log("error: al consultar el servicio: " + e);
-        },
-
-        complete: () =>  {
-          console.log('finalizo el llamado a createPaises')
-
-          // cierra el componente modal y envia por parametro (true)
-          this.dialogRef.close(true);
-        },
-
-      });
-
+        // cierra el componente modal y envia por parametro (true)
+        this.dialogRef.close(true);
+      },
+    });
   }
 
-
- // Color inicial: negro
+  // Color inicial: negro
   updateColors(id: number, updateColors: Colores): void {
+    this.ColorsService.updateColors(id, updateColors).subscribe({
+      next: (updateColors) => {
+        console.log(updateColors);
+        this.snackBar.open('Registro actualizado correcatamente', 'Aceptar', {
+          panelClass: 'app-notification-success',
+          duration: 5000,
+        });
+        this.dialogRef.close(true);
+      },
 
-    this.ColorsService
-    .updateColors(id, updateColors)
-      .subscribe({
+      error: (e) => {
+        this.snackBar.open(
+          'Se presento un error al intentar actualizar el registro',
+          'Aceptar',
+          { panelClass: 'app-notification-danger', duration: 5000 }
+        );
+        console.log('error: al consultar el servicio: ' + e);
+      },
 
-        next: (updateColors) => {
-          console.log(updateColors);
-          this.snackBar.open('Registro actualizado correcatamente', 'Aceptar', { panelClass: 'app-notification-success', duration: 5000,  });
-          this.dialogRef.close(true);
-        },
-
-        error: (e) => {
-          this.snackBar.open('Se presento un error al intentar actualizar el registro', 'Aceptar', { panelClass: 'app-notification-danger', duration: 5000,  });
-          console.log("error: al consultar el servicio: " + e);
-        },
-
-        complete: () =>  {
-          console.log('finalizo el llamado a updateTipoVEHICULO')
-        },
-
-      });
-  
+      complete: () => {
+        console.log('finalizo el llamado a updateTipoColors');
+      },
+    });
   }
 
-
+  calcularCantidadPropiedadesJson(objectJson: any){
+    return Object.keys(objectJson).length;
+  }
 
 }

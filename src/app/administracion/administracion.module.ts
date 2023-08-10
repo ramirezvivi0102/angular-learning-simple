@@ -15,6 +15,8 @@ import { DialogoEliminarComponent } from './dialogo-eliminar/dialogo-eliminar.co
 import { ListadoColorsComponent } from './listado-colors/listado-colors.component';
 import { EditarColorsComponent } from './editar-colors/editar-colors.component';
 import { EliminarColorsComponent } from './eliminar-colors/eliminar-colors.component';
+import { NgxColorsModule } from 'ngx-colors';
+
 
 @NgModule({
   imports: [
@@ -24,6 +26,7 @@ import { EliminarColorsComponent } from './eliminar-colors/eliminar-colors.compo
     ReactiveFormsModule,
     NgApexchartsModule,
     AngularMaterialAllModule,
+    NgxColorsModule,
     RouterModule.forChild(AdministracionRoutes),
   ],
   declarations: [

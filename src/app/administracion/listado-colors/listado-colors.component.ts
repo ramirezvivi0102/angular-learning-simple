@@ -32,7 +32,7 @@ export class ListadoColorsComponent {
   }
   
 
-  mostrarFormularioModificar(color:Colores ) {
+  mostrarFormularioModificar(color:Colores) {
     const dialogRef: MatDialogRef<EditarColorsComponent> = this.dialog.open(EditarColorsComponent,{
       data:color
     });
@@ -58,6 +58,7 @@ export class ListadoColorsComponent {
         id: 0,
         nombre: '',
         rgb: '',
+        color: '',
         favorito: '',
       }
     });
@@ -121,7 +122,7 @@ export class ListadoColorsComponent {
         },
 
         complete: () =>  {
-          console.log('finalizo el llamado a createPaises')
+          console.log('finalizo el llamado a createColors')
         },
 
       });
@@ -152,7 +153,7 @@ export class ListadoColorsComponent {
       },
 
       complete: () =>  {
-        console.log('finalizo el llamado a deletePaises')
+        console.log('finalizo el llamado a deleteColors')
       },
 
     });

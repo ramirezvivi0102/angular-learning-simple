@@ -1,8 +1,9 @@
 
 export interface Colores {
-
+    length: number;
+    x:string;
     id: number;
     nombre: string;
-    rgb: number;
+    rgb: string;
     favorito:false;
   }
