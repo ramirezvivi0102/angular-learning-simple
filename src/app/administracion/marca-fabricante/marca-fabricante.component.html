@@ -1,0 +1,50 @@
+
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Marcas Fabricantes </h4>
+          
+          <div class="row">
+            <div class="col">
+              <h5 class="card-subtitle text-muted">Sirve para ver las fabricas con la que se tienen convenios </h5>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-success" (click)="onMostrarFormulario()">Crear nuevo</button>
+            </div>
+          </div>
+
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle text-nowrap">
+                <thead>
+                    <tr>
+                        <th class="text-dark font-medium fs-4">Fabrica</th>
+                        <th class="text-dark font-medium fs-4">Nombre Contacto</th>
+                        <th class="text-dark font-medium fs-4">Telefono</th>
+                        <th class="text-dark font-medium fs-4">Correo</th>
+                        <th class="text-dark font-medium fs-4">Pais</th>
+                        <th class="text-dark font-medium fs-4">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let marcasf of marcas'>
+                        <td class="fs-4">{{marcasf.nombre}}</td>
+                        <td class="fs-4">{{marcasf.nombreContacto}}</td>
+                        <td class="fs-4">{{marcasf.telefonoContacto}}</td>
+                        <td class="fs-4">{{marcasf.correoContacto}}</td>
+                        <td class="fs-4">{{marcasf.pais.nombre}}</td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="mostrarFormularioModificar(marcasf)">Modificar</button>
+                            <button type="button" class="btn btn-danger" (click)="abrirPopUpEliminar(marcasf)" >Eliminar</button>
+                        </td>
+                    </tr>            
+                </tbody>
+            </table>
+        </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>

@@ -16,6 +16,10 @@ import { ListadoColorsComponent } from './listado-colors/listado-colors.componen
 import { EditarColorsComponent } from './editar-colors/editar-colors.component';
 import { EliminarColorsComponent } from './eliminar-colors/eliminar-colors.component';
 import { NgxColorsModule } from 'ngx-colors';
+import { MarcaFabricanteComponent } from './marca-fabricante/marca-fabricante.component';
+import { MarcasEditarComponent } from './marcas-editar/marcas-editar.component';
+
+
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import { NgxColorsModule } from 'ngx-colors';
     DialogoEliminarComponent,
     ListadoColorsComponent,
     EditarColorsComponent,
-    EliminarColorsComponent
+    EliminarColorsComponent,
+    MarcasEditarComponent,
+    MarcaFabricanteComponent,
+   
+    
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}

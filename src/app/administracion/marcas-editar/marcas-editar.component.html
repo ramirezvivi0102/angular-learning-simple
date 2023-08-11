@@ -1,0 +1,104 @@
+<h1 mat-dialog-title> {{titulo}}</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+
+  <mat-dialog-content>
+
+    <div class="register-form">
+
+
+      <div class="form-group">
+        <label for="nombre">Fabrica</label>
+         <input type="text" id="nombre" formControlName="nombre" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('nombre').errors }" 
+            placeholder="Ingrese el nombre" autocomplete="off" />
+            <div *ngIf="submitted && itemForm('nombre').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('nombre').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('nombre').errors.maxlength">El campo tiene una longitud no permitida</div>
+            </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="nombreContacto">Nombre del Contacto</label>
+         <input type="text" id="nombreContacto" formControlName="nombreContacto" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('nombreContacto').errors }" 
+            placeholder="Ingrese el nombre del  Contacto" autocomplete="off" />
+            <div *ngIf="submitted && itemForm('nombreContacto').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('nombreContacto').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('nombreContacto').errors.maxlength">El campo tiene una longitud no permitida</div>
+            </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="telefonoContacto">Telefono del  Contacto</label>
+         <input type="text" id="telefonoContacto" formControlName="telefonoContacto" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('telefonoContacto').errors }" 
+            placeholder="Ingrese el telefono del Contacto" autocomplete="off" />
+            <div *ngIf="submitted && itemForm('telefonoContacto').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('telefonoContacto').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('telefonoContacto').errors.maxlength">El campo tiene una longitud no permitida</div>
+            </div>
+      </div>
+
+      <div class="form-group">
+        <label for="correoContacto">Correo del Contacto</label>
+         <input type="text" id="correoContacto" formControlName="correoContacto" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('correoContacto').errors }" 
+            placeholder="Ingrese el Correo del  Contacto" autocomplete="off" />
+            <div *ngIf="submitted && itemForm('telefonoContacto').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('correoContacto').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('correoContacto').errors.maxlength">El campo tiene una longitud no permitida</div>
+            </div>
+      </div>
+
+      <!-- <div class="form-group">
+        <label for="pais.id">pais</label>
+         <input type="text" id="pais.id" formControlName="pais.id" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('pais.id').errors }" 
+            placeholder="Ingrese el id pais" autocomplete="off" />
+            <div *ngIf="submitted && itemForm('pais.id').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('pais.id').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('pais.id').errors.maxlength">El campo tiene una longitud no permitida</div>
+            </div>
+      </div> -->
+
+
+      <div class="form-group">
+        <label for="pais.nombre">Pais</label>
+         <input type="text" id="pais.nombre" formControlName="pais.nombre" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('pais.nombre').errors }" 
+            placeholder=" " autocomplete="on" />
+            <div *ngIf="submitted && itemForm('pais.nombre').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('pais.nombre').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('pais.nombre').errors.maxlength">El campo tiene una longitud no permitida</div>
+            </div>
+      </div>
+
+
+      <!-- <div class="form-group">
+        <label for="pais.sigla">pais.sigla</label>
+         <input type="text" id="pais.sigla" formControlName="pais.sigla" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('pais.sigla').errors }" 
+            placeholder=" " autocomplete="on" />
+            <div *ngIf="submitted && itemForm('pais.sigla').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('pais.sigla').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('pais.sigla').errors.maxlength">El campo tiene una longitud no permitida</div>
+            </div>
+      </div> -->
+
+    </div>
+  </mat-dialog-content>
+
+
+  <mat-dialog-actions class="align-items-sm-center">
+    <div class="col text-center ">
+    <button type="submit" class="btn btn-primary " *ngIf="idRegistro === 0">Crear</button>
+    <button type="button" (click)="onActualizarForm()" class="btn btn-primary"*ngIf="idRegistro > 0 ">Actualizar</button>
+    <button type="button" (click)="onResetForm()" class="btn btn-warning float-right">Reset</button>
+    <button type="button" (click)="onCancelarForm()" class="btn btn-info float-right">Cancelar</button>
+    </div>
+  </mat-dialog-actions>
+
+</form>
