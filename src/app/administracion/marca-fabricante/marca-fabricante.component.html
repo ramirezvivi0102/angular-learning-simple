@@ -28,16 +28,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let marcasf of marcas'>
-                        <td class="fs-4">{{marcasf.nombre}}</td>
-                        <td class="fs-4">{{marcasf.nombreContacto}}</td>
-                        <td class="fs-4">{{marcasf.telefonoContacto}}</td>
-                        <td class="fs-4">{{marcasf.correoContacto}}</td>
-                        <td class="fs-4">{{marcasf.pais.nombre}}</td>
+                    <tr *ngFor='let itemMarcaF of marcas'>
+                        <td class="fs-4">{{itemMarcaF.nombre}}</td>
+                        <td class="fs-4">{{itemMarcaF.nombreContacto}}</td>
+                        <td class="fs-4">{{itemMarcaF.telefonoContacto}}</td>
+                        <td class="fs-4">{{itemMarcaF.correoContacto}}</td>
+                        <td class="fs-4">{{itemMarcaF.pais.nombre}}</td>
 
                         <td>
-                            <button type="button" class="btn btn-primary" (click)="mostrarFormularioModificar(marcasf)">Modificar</button>
-                            <button type="button" class="btn btn-danger" (click)="abrirPopUpEliminar(marcasf)" >Eliminar</button>
+                            <button type="button" class="btn btn-primary" (click)="mostrarFormularioModificar(itemMarcaF)">Modificar</button>
+                            <button type="button" class="btn btn-danger" (click)="abrirPopUpEliminar(itemMarcaF)" >Eliminar</button>
                         </td>
                     </tr>            
                 </tbody>

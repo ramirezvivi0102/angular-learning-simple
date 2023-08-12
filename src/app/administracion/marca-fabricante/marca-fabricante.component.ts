@@ -39,9 +39,9 @@ export class MarcaFabricanteComponent implements OnInit{
 
    // Funciones de acceso al servicio base de datos
    
-  mostrarFormularioModificar(marcasf: Marcas) {
+  mostrarFormularioModificar(marcaf: Marcas) {
     const dialogRef: MatDialogRef<MarcasEditarComponent> = this.dialog.open(MarcasEditarComponent,{
-      data:marcasf
+      data:marcaf
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -79,9 +79,10 @@ export class MarcaFabricanteComponent implements OnInit{
       });
 
     dialogRef.afterClosed().subscribe((result) => {
+    
       if (result === true) {
         this.getAllMarcas();
-       
+     
       } else if (result === false) {
         
         console.log('Cancelled');
@@ -151,7 +152,7 @@ export class MarcaFabricanteComponent implements OnInit{
     this.MarcasService
       .getAllMarcas()
       .subscribe({
-
+        
         next: (listTipoServicio) => {
           this.marcas = listTipoServicio;
           console.log(

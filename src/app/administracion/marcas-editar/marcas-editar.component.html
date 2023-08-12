@@ -53,40 +53,16 @@
             </div>
       </div>
 
-      <!-- <div class="form-group">
-        <label for="pais.id">pais</label>
-         <input type="text" id="pais.id" formControlName="pais.id" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && itemForm('pais.id').errors }" 
+       <div class="form-group">
+        <label for="pais">pais</label>
+         <input type="text" id="pais" formControlName="pais" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && itemForm('pais').errors }" 
             placeholder="Ingrese el id pais" autocomplete="off" />
-            <div *ngIf="submitted && itemForm('pais.id').errors" class="invalid-feedback">
-            <div *ngIf="itemForm('pais.id').errors.required">EL campo requerido</div>
-            <div *ngIf="itemForm('pais.id').errors.maxlength">El campo tiene una longitud no permitida</div>
+            <div *ngIf="submitted && itemForm('pais').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('pais').errors.required">EL campo requerido</div>
+            <div *ngIf="itemForm('pais').errors.maxlength">El campo tiene una longitud no permitida</div>
             </div>
-      </div> -->
-
-
-      <div class="form-group">
-        <label for="pais.nombre">Pais</label>
-         <input type="text" id="pais.nombre" formControlName="pais.nombre" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && itemForm('pais.nombre').errors }" 
-            placeholder=" " autocomplete="on" />
-            <div *ngIf="submitted && itemForm('pais.nombre').errors" class="invalid-feedback">
-            <div *ngIf="itemForm('pais.nombre').errors.required">EL campo requerido</div>
-            <div *ngIf="itemForm('pais.nombre').errors.maxlength">El campo tiene una longitud no permitida</div>
-            </div>
-      </div>
-
-
-      <!-- <div class="form-group">
-        <label for="pais.sigla">pais.sigla</label>
-         <input type="text" id="pais.sigla" formControlName="pais.sigla" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && itemForm('pais.sigla').errors }" 
-            placeholder=" " autocomplete="on" />
-            <div *ngIf="submitted && itemForm('pais.sigla').errors" class="invalid-feedback">
-            <div *ngIf="itemForm('pais.sigla').errors.required">EL campo requerido</div>
-            <div *ngIf="itemForm('pais.sigla').errors.maxlength">El campo tiene una longitud no permitida</div>
-            </div>
-      </div> -->
+      </div> 
 
     </div>
   </mat-dialog-content>

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Marcas } from '../models/marcas';
+import { Paises } from '../models/paises';
 
 @Component({
   selector: 'app-marcas-editar',
@@ -13,35 +14,43 @@ import { Marcas } from '../models/marcas';
 export class MarcasEditarComponent implements OnInit {
 
  
-  Marcasf: Marcas| undefined;
+  marcaf: Marcas| undefined;
   titulo = 'Edición de Marcas'
  
   constructor( 
    private snackBar: MatSnackBar,
    private MarcasService: MarcasService,
-     private formBuilder: FormBuilder,
+   private formBuilder: FormBuilder,
  
      // object para data: recibir desde el componente paises-listado
      // dialogRef controlar el cierre del modal 
      @Inject(MAT_DIALOG_DATA) private data: any,
      private dialogRef: MatDialogRef<MarcasEditarComponent>
+     ) {
  
-     ){
- 
-      this.Marcasf= data;
-      this.idRegistro = this.Marcasf.id;
+      this.marcaf= data;
+      this.idRegistro = this.marcaf.id;
       
       this.configurarForm();
  
-      if( this.Marcasf.id == 0){
+      if( this.marcaf.id == 0){
        console.log("el registro es nuevo");
  
       }else {
        console.log("el registro es para edicion");
        // inicializar el form que viene del metodo de cada fila (de la tabla)
        this.form.patchValue({
-         nombre: this.Marcasf.nombre,
-         nombrecontacto: this.Marcasf.nombreContacto,
+         nombre: this.marcaf.nombre,
+         nombreContacto: this.marcaf.nombreContacto,
+         telefonoContacto: this.marcaf.telefonoContacto,
+         correoContacto: this.marcaf.correoContacto,
+        //  pais: this.marcaf.pais.id,
+
+         pais: {
+          id: this.marcaf.pais.id,
+        },
+         
+
        });
       }
       
@@ -79,7 +88,10 @@ export class MarcasEditarComponent implements OnInit {
        console.log("Fallo validacion")
        return;
      }
- 
+      // esto copia el id del pais y modifica el Json acorde como lo espera el servivio backend
+      let idPais = this.form.value.pais;  
+      this.form.value.pais = { id: idPais};
+      
      console.log("llama createMarcas()")
      this.createMarcas(this.form.value);
    }
@@ -93,7 +105,12 @@ export class MarcasEditarComponent implements OnInit {
      }
  
      console.log("llama createPaises()")
-     this.updateMarcas(this.Marcasf.id, this.form.value);
+
+     // esto copia el id del pais y modifica el Json acorde como lo espera el servivio backend
+     let idPais = this.form.value.pais;  
+     this.form.value.pais = { id: idPais};
+
+     this.updateMarcas(this.marcaf.id, this.form.value);
    }
  
    onResetForm(){
