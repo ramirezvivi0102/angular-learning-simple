@@ -16,6 +16,7 @@ export class MarcasEditarComponent implements OnInit {
  
   marcaf: Marcas| undefined;
   titulo = 'Edición de Marcas'
+  arregloPaisesPopUp:Paises[]=[];
  
   constructor( 
    private snackBar: MatSnackBar,
@@ -28,7 +29,8 @@ export class MarcasEditarComponent implements OnInit {
      private dialogRef: MatDialogRef<MarcasEditarComponent>
      ) {
  
-      this.marcaf= data;
+      this.marcaf= data.informacionRegistro;
+      this.arregloPaisesPopUp = data.listados.paises;
       this.idRegistro = this.marcaf.id;
       
       this.configurarForm();
@@ -72,10 +74,10 @@ export class MarcasEditarComponent implements OnInit {
  
    configurarForm() {
      this.form = this.formBuilder.group({
-       nombre: ['', [Validators.required, Validators.maxLength(50)]],
+       nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s\xF1\xD1]+$/)]], //solo letra
        nombreContacto: ['', [Validators.required, Validators.maxLength(50)]],
-       telefonoContacto: ['', [Validators.required, Validators.maxLength(50)]],
-       correoContacto: ['', [Validators.required, Validators.maxLength(50)]],
+       telefonoContacto: ['', [Validators.required, Validators.minLength(7), Validators.pattern(/^\+?\d{1,3}-?\d{1,}-?\d{1,}$/)]],
+       correoContacto: ['', [Validators.required, Validators.pattern(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/)]], //correo debe tner @ y .com
        pais: ['', [Validators.required, Validators.maxLength(50)]]
      });
    }

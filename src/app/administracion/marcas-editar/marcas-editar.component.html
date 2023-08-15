@@ -7,8 +7,10 @@
     <div class="register-form">
 
 
-      <div class="form-group">
-        <label for="nombre">Fabrica</label>
+        <div class="form-group">
+          
+
+       <label for="nombre">Fabrica</label>
          <input type="text" id="nombre" formControlName="nombre" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && itemForm('nombre').errors }" 
             placeholder="Ingrese el nombre" autocomplete="off" />
@@ -53,16 +55,21 @@
             </div>
       </div>
 
-       <div class="form-group">
-        <label for="pais">pais</label>
-         <input type="text" id="pais" formControlName="pais" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && itemForm('pais').errors }" 
-            placeholder="Ingrese el id pais" autocomplete="off" />
-            <div *ngIf="submitted && itemForm('pais').errors" class="invalid-feedback">
-            <div *ngIf="itemForm('pais').errors.required">EL campo requerido</div>
-            <div *ngIf="itemForm('pais').errors.maxlength">El campo tiene una longitud no permitida</div>
-            </div>
-      </div> 
+      <div class="form-group">
+      <label for="pais">Pais</label>
+          <select id="pais" formControlName="pais" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && itemForm('pais').errors }">
+            <option value="" disabled selected>Selecciona un Pais </option>
+            <option *ngFor="let marcafInternoItem of arregloPaisesPopUp" [value]="marcafInternoItem.id">
+              {{ marcafInternoItem.nombre }}
+            </option>
+          </select>
+          <div *ngIf="submitted && itemForm('pais').errors" class="invalid-feedback">
+            <div *ngIf="itemForm('pais').errors.required">El campo es requerido</div>
+            <div *ngIf="itemForm('nombre').errors.maxlength">El campo tiene una longitud no permitida</div>
+          </div>
+        </div>
+
 
     </div>
   </mat-dialog-content>

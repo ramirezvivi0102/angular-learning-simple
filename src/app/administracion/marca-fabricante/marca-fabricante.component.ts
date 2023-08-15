@@ -40,8 +40,14 @@ export class MarcaFabricanteComponent implements OnInit{
    // Funciones de acceso al servicio base de datos
    
   mostrarFormularioModificar(marcaf: Marcas) {
+    let todaData = {
+      informacionRegistro: marcaf,
+      listados: {
+        paises: this.paises
+      }
+    }
     const dialogRef: MatDialogRef<MarcasEditarComponent> = this.dialog.open(MarcasEditarComponent,{
-      data:marcaf
+      data:todaData,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -100,11 +106,11 @@ export class MarcaFabricanteComponent implements OnInit{
       .getAllPaises()
       .subscribe({
 
-        next: (listTipoServicio) => {
-          this.paises = listTipoServicio;
+        next: (paisesLleganDelServicio) => {
+          this.paises = paisesLleganDelServicio;
           console.log(
             'servicio: paisesService.getAllPaises() trajo ' +
-            listTipoServicio.length +
+            paisesLleganDelServicio.length +
               ' registros'
           );
         },
